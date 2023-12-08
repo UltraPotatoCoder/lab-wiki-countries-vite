@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function CountryDetailsPage(props) {
+function CountryDetailsPage() {
   const [countryDetails, setcountryDetails] = useState(null);
-  const countryId = props.match.params.countryId;
+  const { countryId } = useParams();
 
   useEffect(() => {
     axios
@@ -23,7 +25,15 @@ function CountryDetailsPage(props) {
         <div>
           <h3>{countryDetails.name.common}</h3>
           <p>Capital: {countryDetails.capital}</p>
-          <p>Population: {countryDetails.population} </p>
+          <p>Area: {countryDetails.area}m^2</p>
+          <p>Borders:</p>
+          <ul className='border-list'>
+            {countryDetails.borders.map(border => (
+              <li key={border}>
+                <Link to={`/country/${border}`}>{border}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
         <p>Loading...</p>

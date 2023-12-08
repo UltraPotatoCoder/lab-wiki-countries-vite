@@ -21,3 +21,7 @@
 .country-icons {
   padding-right: 10px;
 }
+
+.border-list {
+  list-style-type: none;
+}
